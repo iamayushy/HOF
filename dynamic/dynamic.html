@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic html</title>
+    <style>
+        tr, td, th{
+            border: 1px solid rebeccapurple;
+            padding: 10px;
+            
+        }
+    </style>
+</head>
+<body>
+    <form id="form">
+        <input type="text" id="empName" placeholder="Enter Name">
+        <select id="dept">
+            <option value="IT">IT</option>
+            <option value="Finance">Finance</option>
+            <option value="Legal">Legal</option>
+            
+        </select>
+
+        <input type="number" id="sellOne" placeholder="Enter Sale Year">
+        <input type="number" id="sellTwo" placeholder="Enter Sale Year">
+        <input type="submit" value="ADD">
+    </form>
+    <table>
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Department</th>
+            <th>Year One</th>
+            <th>Year Two</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+    <button onclick="sortEmployees('asc')">
+        Ascending
+    </button>
+    <button onclick="sortEmployees('dsc')">
+        Descending
+    </button>
+</table>
+</body>
+</html>
+<script>
+    document.querySelector("#form").addEventListener("submit", addList);
+    // var tbody = document.getElementById("#tbd");
+    var empObj = [];
+    var holder = document.querySelector("tbody");
+
+    function addList(){
+        event.preventDefault(); 
+        var empName = document.querySelector("#empName").value;
+        var dept = document.querySelector("#dept").value;
+        var sellOne = document.querySelector("#sellOne").value;
+        var sellTwo = document.querySelector("#sellTwo").value;
+        console.log(empName, dept, sellOne, sellTwo);
+
+        var emp = {
+            Name: empName,
+            dept: dept,
+            sellOne: +sellOne,
+            sellTwo: +sellTwo,
+            avg : Math.floor((+sellOne + +sellTwo) / 2)
+        }
+        console.log(emp.Name);
+        empObj.push(emp);
+        console.log(empObj);
+
+        displayArray();
+    }
+
+    function displayArray(){
+        holder.innerHTML = ''
+        for(var i = 0; i < empObj.length; i++){
+            printEmployee(empObj[i])
+        }  
+      }
+
+        //creating element
+        function printEmployee(emp){
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        td1.textContent = emp.Name;
+        var td2 = document.createElement("td");
+        td2.textContent = emp.dept;
+        var td3 = document.createElement("td");
+        td3.textContent = emp.sellOne;
+        var td4 = document.createElement("td");
+        td4.textContent = emp.sellTwo;
+        console.log(td1, td2, td3, td4);
+       
+
+        tr.append(td1, td2, td3, td4);
+        holder.append(tr);
+        }
+
+        
+
+    
+    // var asc = document.querySelector("#asc").addEventListener("click", sort(asc));
+    // var dsc = document.querySelector("#dsc").addEventListener("click", sort(dsc));
+    
+
+    
+    function sortEmployees(type){
+        if(type === "asc"){
+            empObj.sort((a,b)=> a.avg - b.avg)
+        }
+        else{
+            empObj.sort((a,b)=> b.avg - a.avg)
+        }
+        displayArray()
+      }
+
+</script>
