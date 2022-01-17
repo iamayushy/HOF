@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>    
+    #container{
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 30px;
+        padding: 50px 300px;
+        
+    }
+    img{
+        width: 200px;
+    }
+    #holder{
+        text-align: center;
+        border: 5px solid black;
+        padding: 5px;
+        border-radius: 10px;
+        
+    }
+    #name{
+        font-size: large;
+        font-weight: 900;
+    }
+    nav{
+        border: 10px solid black;
+        width: 800px;
+        margin: auto;
+        border-radius: 10px;
+    }
+    ul{
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 100px;
+        font-size: larger;
+        font-weight: 800;
+
+    }
+    </style>
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>Developer</li>
+            <li>Partner</li>
+        </ul>
+    </nav>
+    <div id="container">
+
+    </div>
+</body>
+</html>
+<script>
+    let bdy = document.getElementById("container");
+    var url = "https://reqres.in/api/users";
+
+    fetch(url)
+    .then(data => {
+        return data.json()
+    })
+    .then(final_data => {
+        console.log(final_data.data)
+        display(final_data.data);
+    })
+    .catch(err => {
+        console.log("🤪");
+    })
+
+    function display(user){
+        user.forEach(element => {
+
+            let holder = document.createElement('div')
+            holder.id = "holder";
+
+           let image = document.createElement("img");
+           image.src = element.avatar;
+           let name = document.createElement("p");
+           name.id = "name";
+           name.innerText = element.first_name;
+
+           let email = document.createElement("p");
+           email.innerText = element.email;
+
+            holder.append(image, name, email);
+            bdy.append(holder);
+
+        });
+    }
+    
+    
+</script>
