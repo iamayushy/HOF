@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+body{
+  background-color: antiquewhite;
+}
+.App{
+  font-size: xx-large;
+}
+.login, .sign{
+  text-decoration: none;
+  margin: 20px;
+  text-transform: uppercase;
+  font-size: x-large;
+  border-radius: 4px;
+}
+.login{
+
+  background-color: black;
+  padding: 0px 20px;
+  color: white;
+  border: 1px solid whitesmoke;
+  
+}
+.sign{
+  background-color: whitesmoke;
+  padding: 0px 20px;
+  border: 1px solid black;
+  color: black;
+
+}
+.login:hover{
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+.sign:hover{
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+}
